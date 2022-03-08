@@ -19,9 +19,10 @@ app.get("/env", (req, res) => {
         environment: process.env.NODE_ENV,
     });
 });
-app.get("/hola", (req, res) => {
+
+app.get("/db-env", (req, res) => {
     res.json({
-        message: "hola soy el servidor, heroku",
+        "db-host": process.env.DB_HOST,
     });
 });
 
