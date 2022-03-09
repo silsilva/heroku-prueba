@@ -2,17 +2,7 @@ import * as  express from "express";
 const app = express();
 const port = process.env.PORT || 3000;
 
-
-//console.log(process.env.USER_FULLNAME);
-//LO DE ABAJO ES LO QUE ESCRIBO EN LA TERMINAL TAL CUAL
-//export USER_FULLNAME=silvi
-//$ echo $USER_FULLNAME
-// $ yarn dev
-// $ ts-node index.ts
-
-// console.log(process.env.NODE_ENV); 
-// console.log(process.env.DB_HOST); 
-
+app.use(express.static("dist"));
 
 app.get("/env", (req, res) => {
     res.json({
@@ -24,6 +14,17 @@ app.get("/db-env", (req, res) => {
     res.json({
         "db-host": process.env.DB_HOST,
     });
+});
+
+app.get("/hola", (req, res) => {
+    res.json({
+        message: "hola soy Silvi",
+    });
+});
+
+app.use(express.static("dist"));
+app.get("*", (req, res) => {
+    res.sendFile(__dirname + "/dist/index.html");
 });
 
 app.listen(port, () => {
